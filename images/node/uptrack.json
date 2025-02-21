@@ -1,0 +1,43 @@
+{
+  "$schema": "https://github.com/framjet/docker-uptrack-action/blob/main/schema.json",
+  "variants": [
+    {
+      "namespace": "framjet",
+      "name": "node",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "upstream": {
+        "name": "node"
+      },
+      "filters": {
+        "tags": [
+          {
+            "name": "alpine",
+            "mapped": "latest"
+          },
+          {
+            "name": "23-alpine",
+            "mapped": "23"
+          },
+          {
+            "name": "22-alpine",
+            "mapped": "22"
+          },
+          {
+            "name": "21-alpine",
+            "mapped": "21"
+          },
+          {
+            "name": "20-alpine",
+            "mapped": "20"
+          }
+        ]
+      },
+      "buildArgs": {
+        "WAIT4X_VERSION": "latest"
+      }
+    }
+  ]
+}
