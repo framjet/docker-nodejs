@@ -10,7 +10,8 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 RUN \
-    mkdir /docker-entrypoint.d \
+    apk add --no-cache libc6-compat \
+    && mkdir /docker-entrypoint.d \
     ;
 
 COPY --from=wait4x --chown=root /usr/bin/wait4x /usr/local/bin/wait4x
