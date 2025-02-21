@@ -14,6 +14,9 @@ RUN \
     && mkdir /docker-entrypoint.d \
     ;
 
+# Create a symlink for libssl.so.3 because poor Prisma doesn't know how to use libssl.so.3
+RUN sh -c '[ ! -e /lib/libssl.so.3 ] && ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3 || echo "Link already exists"'
+
 COPY --from=wait4x --chown=root /usr/bin/wait4x /usr/local/bin/wait4x
 
 COPY --chown=root docker-entrypoint.d/* /docker-entrypoint.d
