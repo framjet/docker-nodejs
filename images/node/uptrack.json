@@ -38,6 +38,45 @@
       "buildArgs": {
         "WAIT4X_VERSION": "latest"
       }
+    },
+    {
+      "namespace": "framjet",
+      "name": "node",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "upstream": {
+        "name": "node"
+      },
+      "filters": {
+        "tags": [
+          {
+            "name": "alpine",
+            "mapped": "latest-shell"
+          },
+          {
+            "name": "23-alpine",
+            "mapped": "23-shell"
+          },
+          {
+            "name": "22-alpine",
+            "mapped": "22-shell"
+          },
+          {
+            "name": "21-alpine",
+            "mapped": "21-shell"
+          },
+          {
+            "name": "20-alpine",
+            "mapped": "20-shell"
+          }
+        ]
+      },
+      "buildArgs": {
+        "WAIT4X_VERSION": "latest"
+      },
+      "buildTarget": "shell"
     }
   ]
 }
