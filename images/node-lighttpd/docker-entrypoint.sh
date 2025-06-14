@@ -9,7 +9,7 @@ entrypoint_log() {
     fi
 }
 
-if [ "$1" = "node" ] || [ "$1" = "npm" ] || [ "$1" = "npx" ] || [ "$1" = "pnpm" ] || [ "$1" = "pnpx" ]; then
+if [ "$1" = "node" ] || [ "$1" = "npm" ] || [ "$1" = "npx" ] || [ "$1" = "pnpm" ] || [ "$1" = "pnpx" ] || [ "$1" = "/usr/sbin/lighttpd" ]; then
     if /usr/bin/find "/docker-entrypoint.d/" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v; then
         entrypoint_log "$0: /docker-entrypoint.d/ is not empty, will attempt to perform configuration"
 
@@ -44,14 +44,4 @@ if [ "$1" = "node" ] || [ "$1" = "npm" ] || [ "$1" = "npx" ] || [ "$1" = "pnpm" 
     fi
 fi
 
-if [ -t 0 ]; then
-    if [ "${1#-}" != "$1" ]; then
-        node "$@"
-    elif [ "" != "$1" ]; then
-        exec "$@"
-    else
-        zsh
-    fi
-else
-    entrypoint_log "$0: Ready!"
-fi
+exec "$@"
