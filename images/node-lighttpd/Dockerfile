@@ -1,6 +1,4 @@
 ARG UPTRACK_SOURCE=framjet/node:latest
-ARG WAIT4X_VERSION=latest
-FROM docker.io/atkrad/wait4x:${WAIT4X_VERSION} AS wait4x
 FROM ${UPTRACK_SOURCE} AS builder
 ARG LIGHTTPD_VERSION=1.4.79-r0
 
@@ -56,13 +54,12 @@ RUN set -x \
     ;
 
 COPY --chown=root docker-entrypoint.d/* /docker-entrypoint.d
-COPY --chown=root docker-entrypoint.sh /docker-entrypoint.sh
 COPY --chown=root lighttpd/ /etc/lighttpd/
 
+# Configure entrypoint
+ENV DOCKER_ENTRYPOINT_COMMANDS="/usr/sbin/lighttpd"
 ENV HTTP_ROOT=/app/public
 
 EXPOSE 80/tcp
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["/usr/sbin/lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
